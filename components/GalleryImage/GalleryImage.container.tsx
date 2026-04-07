@@ -1,18 +1,16 @@
-import { IGalleryImage } from "@gallery-shared/image/types";
 import { useSetting } from "@common/lib/setting/services";
 import { services } from "@core/lib/api";
 import { overridable } from "@core/lib/overridable";
-import { useLoaderAsync } from "@core/lib/useLoader";
+import { IGalleryImage } from "@gallery-shared/image/types";
+import { IGalleryImageContextProps, injectGalleryImageContextProps } from "@gallery/lib/context";
 import { withLayoutMetadata } from "@theming/lib/layout/componentRegistry";
-import { useEffect, useState } from "react";
+import { ILayoutComponent, ILayoutComponentSerialized } from "@theming/lib/layout/layout";
 import { createInjector, inject, mergeProps } from "unstateless";
-import icon from './icon.svg';
 import { GalleryImageComponent } from "./GalleryImage.component";
-import { IGalleryImageInputProps, IGalleryImageProps, GalleryImageProps } from "./GalleryImage.d";
+import { GalleryImageProps, IGalleryImageInputProps, IGalleryImageProps } from "./GalleryImage.d";
 import { GalleryImageLayoutEditor } from "./GalleryImage.layout";
 import { GalleryImagePropEditor } from "./GalleryImage.props";
-import { ILayoutComponent, ILayoutComponentSerialized } from "@theming/lib/layout/layout";
-import { IGalleryImageContextProps, injectGalleryImageContextProps } from "@gallery/lib/context";
+import icon from './icon.svg';
 
 export const useFullImageUrl = (folderSetting: string, fileName:string) => {
     const imgHost = useSetting("imageHost");
@@ -30,7 +28,7 @@ export const getFullImageUrl = async (folderSetting: string, fileName:string) =>
         : "";
 }
 
-const injectGalleryImageProps = createInjector(({id, image}:IGalleryImageInputProps & IGalleryImageContextProps):IGalleryImageProps => {
+const injectGalleryImageProps = createInjector(({image}:IGalleryImageInputProps & IGalleryImageContextProps):IGalleryImageProps => {
     const fullUrl = useFullImageUrl("gallery.imageFolder", image?.url || "");
 
     return {fullUrl};
