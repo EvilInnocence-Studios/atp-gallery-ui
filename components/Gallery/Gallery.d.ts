@@ -1,0 +1,10 @@
+export declare interface IGalleryProps {
+
+}
+
+// What gets passed into the component from the parent as attributes
+export declare interface IGalleryInputProps {
+    classes?: any;
+}
+
+export type GalleryProps = IGalleryInputProps & IGalleryProps;

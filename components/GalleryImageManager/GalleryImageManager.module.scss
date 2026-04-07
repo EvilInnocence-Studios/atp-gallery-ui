@@ -1,0 +1,17 @@
+@use "@styles/globals.module.scss";
+
+.galleryImageManager {
+    .searchRow {
+        :global(.ant-input-group-wrapper) {
+            display: block;
+            max-width: 368px;
+            margin: var(--padding) auto;
+        }
+    }
+    .galleryImageList {
+        margin-top: var(--padding);
+        > * {
+            margin-top: var(--padding);
+        }
+    }
+}

@@ -5,7 +5,10 @@ export const menus: Index<ItemType<MenuItemType>[]> = {
     admin: [{
         key: "gallery",
         label: "Gallery",
-        children: []
+        children: [{
+            key: "gallery/images",
+            label: "Images"
+        }]
     }],
     public: [],
 };

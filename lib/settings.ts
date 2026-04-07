@@ -1,4 +1,14 @@
-import { Index } from "ts-functional/dist/types";
-import { ISettingsConfig } from "@core/lib/settings";
+import { ISettingContainer } from "@common/lib/setting/types";
 
-export const settings: Index<ISettingsConfig> = {};
+export const settings: ISettingContainer = {
+    Gallery: {
+        General: {
+            "gallery.imageFolder": {
+                displayName: "Image Folder",
+                type: "string",
+                defaultValue: "gallery/images",
+                description: "The folder where gallery images are stored.",
+            }
+        }
+    }
+};
