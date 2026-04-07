@@ -1,13 +1,10 @@
-import { createInjector, inject, mergeProps } from "unstateless";
-import {GalleryComponent} from "./Gallery.component";
-import {IGalleryInputProps, GalleryProps, IGalleryProps} from "./Gallery.d";
 import { overridable } from "@core/lib/overridable";
-import { useGallery } from "@gallery/lib/useGallery";
+import { createInjector, inject, mergeProps } from "unstateless";
+import { GalleryComponent } from "./Gallery.component";
+import { GalleryProps, IGalleryInputProps, IGalleryProps } from "./Gallery.d";
 
 const injectGalleryProps = createInjector(({}:IGalleryInputProps):IGalleryProps => {
-    const {list} = useGallery();
-    
-    return {images: list()};
+    return {};
 });
 
 const connect = inject<IGalleryInputProps, GalleryProps>(mergeProps(

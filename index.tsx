@@ -8,6 +8,7 @@ import { GalleryImageTitle } from "./components/GalleryImageView/GalleryImageTit
 import { menus } from "./lib/menus";
 import { routes } from "./lib/routes";
 import { settings } from "./lib/settings";
+import { GalleryImageList } from "./components/GalleryImageList";
 
 export const module: IModule = {
     name: "gallery",
@@ -21,6 +22,7 @@ ComponentRegistry.register(GalleryImage);
 ComponentRegistry.register(GalleryImageTitle);
 ComponentRegistry.register(GalleryImageDescription);
 ComponentRegistry.register(GalleryImagePostDate);
+ComponentRegistry.register(GalleryImageList);
 
 LayoutRegistry.register({
     name: "galleryImageView",
@@ -41,3 +43,13 @@ LayoutRegistry.register({
     },
     priority: 700,
 });
+
+LayoutRegistry.register({
+    name: "galleryImageList",
+    displayName: "Gallery Image List",
+    description: "A list of images",
+    defaultLayout: {
+        component: "Empty",
+    },
+    priority: 700,
+})
