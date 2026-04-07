@@ -1,14 +1,15 @@
 import { IModule } from "@core/lib/module";
 import { ComponentRegistry, LayoutRegistry } from "@theming/lib/layout/componentRegistry";
 import { GalleryImage } from "./components/GalleryImage";
+import { GalleryImageList } from "./components/GalleryImageList";
 import { GalleryImageView } from "./components/GalleryImageView";
 import { GalleryImageDescription } from "./components/GalleryImageView/GalleryImageDescription";
 import { GalleryImagePostDate } from "./components/GalleryImageView/GalleryImagePostDate";
 import { GalleryImageTitle } from "./components/GalleryImageView/GalleryImageTitle";
+import { ImageScroller } from "./components/ImageScroller";
 import { menus } from "./lib/menus";
 import { routes } from "./lib/routes";
 import { settings } from "./lib/settings";
-import { GalleryImageList } from "./components/GalleryImageList";
 
 export const module: IModule = {
     name: "gallery",
@@ -23,6 +24,7 @@ ComponentRegistry.register(GalleryImageTitle);
 ComponentRegistry.register(GalleryImageDescription);
 ComponentRegistry.register(GalleryImagePostDate);
 ComponentRegistry.register(GalleryImageList);
+ComponentRegistry.register(ImageScroller);
 
 LayoutRegistry.register({
     name: "galleryImageView",
