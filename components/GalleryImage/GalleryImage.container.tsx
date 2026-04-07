@@ -12,6 +12,7 @@ import { IGalleryImageInputProps, IGalleryImageProps, GalleryImageProps } from "
 import { GalleryImageLayoutEditor } from "./GalleryImage.layout";
 import { GalleryImagePropEditor } from "./GalleryImage.props";
 import { ILayoutComponent, ILayoutComponentSerialized } from "@theming/lib/layout/layout";
+import { IGalleryImageContextProps, injectGalleryImageContextProps } from "@gallery/lib/context";
 
 export const useFullImageUrl = (folderSetting: string, fileName:string) => {
     const imgHost = useSetting("imageHost");
@@ -29,26 +30,14 @@ export const getFullImageUrl = async (folderSetting: string, fileName:string) =>
         : "";
 }
 
-export const useGalleryImage = ({imageId}:IGalleryImageInputProps) => {
-    const [image, setImage] = useState<IGalleryImage | null>(null);
+const injectGalleryImageProps = createInjector(({id, image}:IGalleryImageInputProps & IGalleryImageContextProps):IGalleryImageProps => {
     const fullUrl = useFullImageUrl("gallery.imageFolder", image?.url || "");
-    const loader = useLoaderAsync();
 
-    useEffect(() => {
-        if(imageId) {
-            loader(async () =>
-                services().gallery.image.get(imageId)
-                    .then(setImage)
-            );
-        }
-    }, [imageId]);
-
-    return {image, isLoading: loader.isLoading, fullUrl};
-}
-
-const injectGalleryImageProps = createInjector(({imageId}:IGalleryImageInputProps):IGalleryImageProps => useGalleryImage({imageId}));
+    return {fullUrl};
+});
 
 const connect = inject<IGalleryImageInputProps, GalleryImageProps>(mergeProps(
+    injectGalleryImageContextProps,
     injectGalleryImageProps,
 ));
 export const connectGalleryImage = connect;

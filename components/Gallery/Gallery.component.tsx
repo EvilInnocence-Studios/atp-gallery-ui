@@ -1,7 +1,17 @@
 import { overridable } from "@core/lib/overridable";
-import {GalleryProps} from "./Gallery.d";
+import { GalleryImageIdContext } from "@gallery/lib/context";
+import { Layout } from "@theming/components/Layout";
+import { GalleryProps } from "./Gallery.d";
 import styles from './Gallery.module.scss';
 
-export const GalleryComponent = overridable(({classes = styles}:GalleryProps) =>
-    <div>Gallery component goes here.</div>
+const Provider = GalleryImageIdContext.Provider;
+
+export const GalleryComponent = overridable(({classes = styles, images}:GalleryProps) =>
+    <div className={classes.gallery}>
+        {images.map((image) => (
+            <Provider key={image.id} value={image.id}>
+                <Layout element="galleryImageListItem" />
+            </Provider>
+        ))}
+    </div>
 );
