@@ -27,7 +27,7 @@ export const GalleryPickerComponent = overridable(({
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
                     {imageId && (
                         <div className={classes.smallImagePreview}>
-                            <GalleryImage imageId={imageId} settingKey={settingKey} />
+                            <GalleryImage id={imageId} />
                         </div>
                     )}
                     <div style={{ display: 'flex', gap: '0px' }}>

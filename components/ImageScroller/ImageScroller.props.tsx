@@ -21,6 +21,7 @@ export const ImageScrollerPropEditor = (
                     imageIds[index] = newId;
                     updateProp("imageIds")(imageIds);
                 }}
+                small
             />
             <Button danger onClick={() => {
                 updateProp("imageIds")(imageIds.filter(i => i !== id));
