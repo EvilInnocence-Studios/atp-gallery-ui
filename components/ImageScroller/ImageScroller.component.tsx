@@ -14,8 +14,6 @@ export const ImageScrollerComponent = overridable(({classes = styles, className,
         title=""
         getId={prop("id")}
         Component={RenderItem}
-        className={className}
-        classes={classes}
     />
 </>);
 
