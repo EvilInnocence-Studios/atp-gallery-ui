@@ -80,7 +80,7 @@ export const GalleryPickerComponent = overridable(({
                                     }}
                                 >
                                     <div className={classes.thumbnailWrapper}>
-                                        <GalleryImage imageId={image.id} />
+                                        <GalleryImage id={image.id} />
                                     </div>
                                     <div className={classes.imageName}>{image.title || image.url}</div>
                                 </div>
