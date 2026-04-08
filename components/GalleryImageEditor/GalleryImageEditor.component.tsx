@@ -23,7 +23,7 @@ export const GalleryImageEditorComponent = overridable(({ image, isLoading, uplo
                 <DeleteBtn entityType="banner" onClick={remove} />
                 <UpdateButtons />
             </div>
-            <GalleryImage imageId={image.id} />
+            <GalleryImage id={image.id} />
             <Upload.Dragger customRequest={({ file }) => upload(file as File)} showUploadList={false}>
                 <FontAwesomeIcon icon={faRefresh} /> Replace image
             </Upload.Dragger>

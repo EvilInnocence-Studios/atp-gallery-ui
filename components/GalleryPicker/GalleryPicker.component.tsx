@@ -10,7 +10,6 @@ import { faHandPointer, faUpload } from "@fortawesome/free-solid-svg-icons";
 export const GalleryPickerComponent = overridable(({
     classes = styles,
     imageId,
-    settingKey,
     isModalVisible,
     setIsModalVisible,
     images,
@@ -40,7 +39,7 @@ export const GalleryPickerComponent = overridable(({
                 </div>
             ) : (
                 <>
-                    {imageId && <GalleryImage className={classes.imagePreview} imageId={imageId} settingKey={settingKey} />}
+                    {imageId && <GalleryImage className={classes.imagePreview} id={imageId} />}
                     <br />
                     <Upload.Dragger customRequest={({ file }) => upload(file as File)} showUploadList={false}>
                         <p className="ant-upload-text">

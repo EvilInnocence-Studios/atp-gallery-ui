@@ -1,13 +1,12 @@
-import { overridable } from "@core/lib/overridable";
-import {ImageScrollerProps} from "./ImageScroller.d";
-import styles from './ImageScroller.module.scss';
 import { Scroller } from "@core/components/Scroller";
+import { overridable } from "@core/lib/overridable";
 import { prop } from "ts-functional";
 import { GalleryImageListItem } from "../GalleryImageListItem";
+import { ImageScrollerProps } from "./ImageScroller.d";
 
 const RenderItem = ({item}:{item: string}) => <GalleryImageListItem id={item} />;
 
-export const ImageScrollerComponent = overridable(({classes = styles, className, css, imageIds}:ImageScrollerProps) => <>
+export const ImageScrollerComponent = overridable(({css, imageIds}:ImageScrollerProps) => <>
     {css && <style>{css}</style>}
     <Scroller
         items={imageIds || []}
