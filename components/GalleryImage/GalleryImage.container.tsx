@@ -43,7 +43,7 @@ export const connectGalleryImage = connect;
 export const GalleryImage = withLayoutMetadata(
     overridable<IGalleryImageInputProps>(connect(GalleryImageComponent)),
     {
-        name: "Image",
+        name: "GalleryImage",
         displayName: "Gallery Image",
         category: "Gallery",
         subCategory: "Image",
