@@ -24,7 +24,7 @@ export const GalleryImageDescription = withLayoutMetadata(
         name: "GalleryImageDescription",
         displayName: "Gallery Image Description",
         category: "Gallery",
-        subCategory: "Image",
+        subCategory: "Meta",
         description: "",
         icon,
         getSlotDisplayName: (slotName, props) => props[slotName] || slotName,

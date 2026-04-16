@@ -24,7 +24,7 @@ export const GalleryImagePostDate = withLayoutMetadata(
         name: "GalleryImagePostDate",
         displayName: "Gallery Image Post Date",
         category: "Gallery",
-        subCategory: "Image",
+        subCategory: "Meta",
         description: "",
         icon,
         getSlotDisplayName: (slotName, props) => props[slotName] || slotName,
