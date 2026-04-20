@@ -30,6 +30,8 @@ LayoutRegistry.register({
     name: "galleryImageView",
     displayName: "Gallery Image View",
     description: "The design of a gallery image page",
+    category: "Gallery",
+    subCategory: "Image",
     defaultLayout: {
         component: "Empty",
     },
@@ -40,6 +42,8 @@ LayoutRegistry.register({
     name: "galleryImageListItem",
     displayName: "Gallery Image List Item",
     description: "The design of an image in a gallery list",
+    category: "Gallery",
+    subCategory: "Image",
     defaultLayout: {
         component: "Empty",
     },
@@ -50,6 +54,8 @@ LayoutRegistry.register({
     name: "galleryImageList",
     displayName: "Gallery Image List",
     description: "A list of images",
+    category: "Gallery",
+    subCategory: "Image",
     defaultLayout: {
         component: "Empty",
     },
