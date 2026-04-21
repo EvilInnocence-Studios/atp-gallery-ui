@@ -1,15 +1,9 @@
 @use "@styles/globals.module.scss";
 
 .galleryImageEditor {
-    border: solid 2px var(--borderColor);
-    border-radius: var(--borderRadius);
-    padding: var(--padding);
     .updateButtons {
         text-align: right;
-        margin-bottom: var(--padding);
-    }
-    :global(.label) {
-        margin-top: var(--paddingSmall);
+        margin-bottom: 16px;
     }
     img {
         width: 100%;

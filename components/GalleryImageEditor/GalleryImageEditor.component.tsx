@@ -3,7 +3,7 @@ import { Editable } from "@core/components/Editable";
 import { Label } from "@core/components/Label";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DatePicker, Spin, Switch, Tabs, Upload } from "antd";
+import { Card, DatePicker, Spin, Switch, Tabs, Upload } from "antd";
 import { GalleryImage } from "../GalleryImage";
 import { GalleryImageEditorProps } from "./GalleryImageEditor.d";
 import styles from './GalleryImageEditor.module.scss';
@@ -14,7 +14,7 @@ import { services } from "@core/lib/api";
 
 export const GalleryImageEditorComponent = overridable(({ image, isLoading, upload, updateString, updateToggle, UpdateButtons, remove, classes = styles }: GalleryImageEditorProps) =>
     <Spin spinning={isLoading}>
-        <div className={classes.galleryImageEditor}>
+        <Card className={classes.galleryImageEditor}>
             <div className={classes.updateButtons}>
                 <Switch
                     checked={image.enabled}
@@ -58,6 +58,6 @@ export const GalleryImageEditorComponent = overridable(({ image, isLoading, uplo
                     }
                 ]}
             />
-        </div>
+        </Card>
     </Spin>
 );
