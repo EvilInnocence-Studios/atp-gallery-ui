@@ -1,3 +1,4 @@
+import { ITag } from "@common-shared/tag/types";
 import { Query } from "@core-shared/express/types";
 import { IMethods } from "@core/lib/types";
 import { getResults, handleError } from "@core/lib/util";
@@ -22,6 +23,11 @@ export const imageServices = ({get, post, patch, remove}: IMethods) => ({
                 .catch(handleError);
         },
         update: (id: string, updates: Partial<IGalleryImage>): Promise<IGalleryImage> => patch(`gallery/image/${id}`, updates).then(getResults),
-        remove: (id: string): Promise<null> => remove(`gallery/image/${id}`)
+        remove: (id: string): Promise<null> => remove(`gallery/image/${id}`),
+        tag: {
+            search: (imageId: string): Promise<ITag[]> => get(`gallery/image/${imageId}/tag`).then(getResults),
+            create: (imageId: string, tagId: string): Promise<void> => post(`gallery/image/${imageId}/tag`, {tagId}).then(getResults),
+            remove: (imageId: string, tagId: string): Promise<void> => remove(`gallery/image/${imageId}/tag/${tagId}`).then(getResults),
+        },
     }
 });
