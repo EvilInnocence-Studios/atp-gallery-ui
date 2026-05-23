@@ -1,17 +1,17 @@
-import { createInjector, inject, mergeProps } from "unstateless";
-import {GalleryImageListComponent} from "./GalleryImageList.component";
-import {IGalleryImageListInputProps, GalleryImageListProps, IGalleryImageListProps} from "./GalleryImageList.d";
 import { overridable } from "@core/lib/overridable";
+import { useGallery } from "@gallery/lib/useGallery";
 import { withLayoutMetadata } from "@theming/lib/layout/componentRegistry";
-import icon from './icon.svg';
+import { createInjector, inject, mergeProps } from "unstateless";
+import { GalleryImageListComponent } from "./GalleryImageList.component";
+import { GalleryImageListProps, IGalleryImageListInputProps, IGalleryImageListProps } from "./GalleryImageList.d";
 import { GalleryImageListLayoutEditor } from "./GalleryImageList.layout";
 import { GalleryImageListPropEditor } from "./GalleryImageList.props";
-import { useGallery } from "@gallery/lib/useGallery";
+import icon from './icon.svg';
 
 const injectGalleryImageListProps = createInjector(({}:IGalleryImageListInputProps):IGalleryImageListProps => {
     const {list} = useGallery();
     
-    return {images: list()};
+    return {images: list().sort((a, b) => new Date(b.postDate).getTime() - new Date(a.postDate).getTime())};
 
 });
 
