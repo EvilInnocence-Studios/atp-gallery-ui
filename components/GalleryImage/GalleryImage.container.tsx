@@ -12,7 +12,7 @@ import { GalleryImageLayoutEditor } from "./GalleryImage.layout";
 import { GalleryImagePropEditor } from "./GalleryImage.props";
 import icon from './icon.svg';
 
-export const useFullImageUrl = (folderSetting: string, fileName:string) => {
+export const useFullImageUrl = (folderSetting: string, fileName: string) => {
     const imgHost = useSetting("imageHost");
     const imgFolder = useSetting(folderSetting);
     return !!imgHost && !!imgFolder
@@ -20,7 +20,7 @@ export const useFullImageUrl = (folderSetting: string, fileName:string) => {
         : "";
 }
 
-export const getFullImageUrl = async (folderSetting: string, fileName:string) => {
+export const getFullImageUrl = async (folderSetting: string, fileName: string) => {
     const imgHost = await services().setting.get("imageHost");
     const imgFolder = await services().setting.get(folderSetting);
     return !!imgHost && !!imgFolder
@@ -28,10 +28,10 @@ export const getFullImageUrl = async (folderSetting: string, fileName:string) =>
         : "";
 }
 
-const injectGalleryImageProps = createInjector(({image}:IGalleryImageInputProps & IGalleryImageContextProps):IGalleryImageProps => {
+const injectGalleryImageProps = createInjector(({ image }: IGalleryImageInputProps & IGalleryImageContextProps): IGalleryImageProps => {
     const fullUrl = useFullImageUrl("gallery.imageFolder", image?.url || "");
 
-    return {fullUrl};
+    return { fullUrl };
 });
 
 const connect = inject<IGalleryImageInputProps, GalleryImageProps>(mergeProps(
@@ -51,12 +51,13 @@ export const GalleryImage = withLayoutMetadata(
         description: "A gallery image",
         layoutEditor: GalleryImageLayoutEditor,
         propEditor: GalleryImagePropEditor,
-        serialize: async (cmp:ILayoutComponent, context: { addFile: (name: string, blob: Blob) => void }): Promise<ILayoutComponentSerialized<{img:IGalleryImage, data: string}>> => {
+        serialize: async (cmp: ILayoutComponent, context: { addFile: (name: string, blob: Blob) => void }): Promise<ILayoutComponentSerialized<{ img: IGalleryImage, data: string }>> => {
             // Load the image and serialize it to  __data along with the image file itself
             const img = await services().gallery.image.get(cmp.props?.imageId || "");
             const fullUrl = await getFullImageUrl("gallery.imageFolder", img.url || "");
+            console.log(fullUrl);
             const blob = await fetch(fullUrl, { mode: 'cors', cache: 'no-cache' }).then(res => res.blob());
-            
+
             if (context && context.addFile) {
                 context.addFile(img.url, blob);
             }
@@ -64,15 +65,15 @@ export const GalleryImage = withLayoutMetadata(
             return {
                 ...cmp,
                 __data: {
-                    img, 
+                    img,
                     data: img.url // Store filename instead of base64
                 }
             };
         },
-        deserialize: async ({__data, ...cmp}:ILayoutComponentSerialized<{img:IGalleryImage, data: string}>, context: { getFile: (name: string) => Promise<Blob | null> }) => {
+        deserialize: async ({ __data, ...cmp }: ILayoutComponentSerialized<{ img: IGalleryImage, data: string }>, context: { getFile: (name: string) => Promise<Blob | null> }) => {
             if (!__data) return Promise.resolve(cmp);
 
-            const {img, data} = __data;
+            const { img, data } = __data;
             const fileName = data; // 'data' now holds the filename
 
             // Get blob from context
@@ -83,21 +84,21 @@ export const GalleryImage = withLayoutMetadata(
 
             if (!blob) {
                 // Fallback or error if image not found in zip
-                 console.warn(`Image ${fileName} not found in theme package`);
-                 return Promise.resolve(cmp);
+                console.warn(`Image ${fileName} not found in theme package`);
+                return Promise.resolve(cmp);
             }
 
             const file = new File([blob], img.url);
 
             // Create image from file
-            const newImg:Partial<IGalleryImage> = await services().gallery.image.create(file, true);
+            const newImg: Partial<IGalleryImage> = await services().gallery.image.create(file, true);
             const imageId = newImg.id as string;
             newImg.id = undefined;
 
             // Update the image with the original metadata
             img.id = imageId;
             await services().gallery.image.update(imageId, img);
-            
+
             return Promise.resolve({
                 ...cmp,
                 props: {
