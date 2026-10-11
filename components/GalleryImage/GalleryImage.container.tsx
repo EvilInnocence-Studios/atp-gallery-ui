@@ -55,6 +55,7 @@ export const GalleryImage = withLayoutMetadata(
             // Load the image and serialize it to  __data along with the image file itself
             const img = await services().gallery.image.get(cmp.props?.imageId || "");
             const fullUrl = await getFullImageUrl("gallery.imageFolder", img.url || "");
+            console.log(img);
             console.log(fullUrl);
             const blob = await fetch(fullUrl, { mode: 'cors', cache: 'no-cache' }).then(res => res.blob());
 
