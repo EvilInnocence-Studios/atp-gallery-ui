@@ -3,18 +3,18 @@ import { Editable } from "@core/components/Editable";
 import { Label } from "@core/components/Label";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card, DatePicker, Spin, Switch, Tabs, Upload } from "antd";
+import { DatePicker } from "@core/components/DatePicker";
+import { Card, Spin, Switch, Tabs, Upload } from "antd";
 import { GalleryImage } from "../GalleryImage";
 import { GalleryImageEditorProps } from "./GalleryImageEditor.d";
 import styles from './GalleryImageEditor.module.scss';
 import { overridable } from "@core/lib/overridable";
-import dayjs from "dayjs";
 import { EntityTagEditor } from "@common/components/EntityTagEditor";
 import { services } from "@core/lib/api";
 
 export const GalleryImageEditorComponent = overridable(({ image, isLoading, upload, updateString, updateToggle, UpdateButtons, remove, classes = styles }: GalleryImageEditorProps) =>
     <Spin spinning={isLoading}>
-        <Card className={classes.galleryImageEditor}>
+        {!!image?.id && <Card className={classes.galleryImageEditor}>
             <div className={classes.updateButtons}>
                 <Switch
                     checked={image.enabled}
@@ -39,8 +39,8 @@ export const GalleryImageEditorComponent = overridable(({ image, isLoading, uplo
                             <Label label="Description"><Editable value={image.description || ""} onChange={updateString("description")} /></Label>
                             <Label label="Post Date">
                                 <DatePicker
-                                    value={image.postDate ? dayjs(image.postDate) : null}
-                                    onChange={(date) => updateString("postDate")(date ? date.toISOString() : "")}
+                                    value={image.postDate}
+                                    onChange={updateString("postDate")}
                                     placeholder="Post Date"
                                 />
                             </Label>
@@ -58,6 +58,6 @@ export const GalleryImageEditorComponent = overridable(({ image, isLoading, uplo
                     }
                 ]}
             />
-        </Card>
+        </Card>}
     </Spin>
 );
